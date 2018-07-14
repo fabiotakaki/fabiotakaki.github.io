@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html><meta charset="utf-8">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans|Teko" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet" />
+<title>
+  
+  Fabio S. Takaki - TakakiME
+  
+</title><body>
+      <div class="container">
+        <div class="wrapper"><header>
+  <a href="/">
+    <img src="/img/profile.png" class="profile" />
+  </a>
+  <h1><a href="/">Fabio S. Takaki</a></h1>  
+  <div class="social-media">
+    <a href="https://www.linkedin.com/fabiotakaki" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="https://www.github.com/takaki10" target="_blank"><i class="fab fa-github-square"></i></a>
+    <a href="https://www.twitter.com/fabiotakaki" target="_blank"><i class="fab fa-twitter-square"></i></a>
+    <a href="mailto:fabio.stakaki@gmail.com" target="_blank"><i class="fas fa-envelope-square"></i></a>
+  </div>
+  <a href="https://drive.google.com/file/d/0B-PL2BKr22AveWpBMGpka21uQlk/view?usp=sharing" target="_blank">Download my CV <i class="fas fa-paperclip"></i></a>
+</header>
+<div id="content">
+<section id="main">
+  <div class="title">
+    <h1 id="title">RGB and HSL</h1>
+    <h4 id="date"> Wed Nov 9, 2016 </h4>
+    <h5 id="wordcount"> 1157 Words </h5>
+  </div>
+  <div>
+      <article id="content" class="post-body">
+         
+
+<p><style>
+  #result2, #result1{
+    width:200px;
+    padding:10px;
+  }</p>
+
+<p>input{
+    padding:10px;
+    border-radius: 5px;
+    border:1px solid #ccc;
+    width:100%;
+    margin:10px 0;
+  }</p>
+
+<p>button{
+    padding:10px;
+    border:1px solid #ccc;
+    background: #fff;
+  }</p>
+
+<p>button:hover{
+    background: #333;
+    color:#fff;
+  }
+</style>
+Recently my teacher <a href="http://buscatextual.cnpq.br/buscatextual/visualizacv.do?id=K4706412Y3" target="_blank">Almir Olivette Artero</a>, gave us a work to convert RGB to HSL or vice-versa to start to learn a little about CG.</p>
+
+<p>Then, I decided to share here how I did the calculation and implementation.</p>
+
+<p>Notice that it is possible to visualize with the result the preview of the color.</p>
+
+<p>Lastly, I will post in another post, how to manipulate images showing all code used.</p>
+
+<h2 id="hsl-to-rgb">HSL to RGB</h2>
+
+<p>Second <a href="https://en.wikipedia.org/wiki/HSL_and_HSV" target="_blank">Wikipedia</a>, HSL are the two most common cylindrical-coordinate representations of points in an RGB color model. The representation rearrange the geometry of RGB in an attempt to be more intuitive and perceptually relevant than the cartesian (cube) representation. Developed in the 1970s for computer graphics applications, HSL are used today in color pickers, in image editing software, and less commonly in image analysis and computer vision.</p>
+
+<p>HSL stands hue, saturation and lightness, where hue is defined by angular value between 0° and 360°. Starting by red at 0°, passing through the green primary at 120° and the blue primary at 240°, and then going back to red at 360°. Another two properties saturation and lightness is defined between 0% and 100%, where lightness from black to white and saturation is about gray colors scales to the definitive color.</p>
+
+<p>To calculate, we used the formula where hue is defined 0 ≤ H &lt; 360, saturation 0 ≤ S ≤ 1 and lightness 0 ≤ L ≤ 1 values.</p>
+
+<p>Then we defined the following variables:</p>
+
+<p>C = (1 - |2L - 1|) × S</p>
+
+<p>X = C × (1 - |(H / 60°) mod 2 - 1|)</p>
+
+<p>m = L - C/2</p>
+
+<p><img src="/img/hsv-to-rgb.gif" alt="alt formula-hsl-to-rgb" title="HSL to RGB" /></p>
+
+<p>Finally, with this variables, we can do the following calculation to get RGB through R&rsquo;G&rsquo;B&rsquo; values:</p>
+
+<p>(R,G,B) = ((R&rsquo;+m)×255, (G&rsquo;+m)×255,(B&rsquo;+m)×255)</p>
+
+<p>Using this formula, we can test with the form below implemented with Javascript:</p>
+
+<p><input id="h" placeholder="Value of H:" /><br>
+<input id="s" placeholder="Value of S:" /><br>
+<input id="l" placeholder="Value of L:" /><br>
+<button id="hsl_to_rgb">Calculate</button>
+<div id="result1">Result HSL to RGB</div></p>
+
+<h1 id="algorithm-implemented-in-javascript">Algorithm Implemented in Javascript</h1>
+
+<p>Obs: the code already verify input values :)</p>
+
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">46
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">47
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">48
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">49
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">50
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">51
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">52
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">53
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">54
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">55
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">56
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">57
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">58
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">59
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">60
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">61
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">62
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">63
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">64
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">65
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">66
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">67
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">68
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">  <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">hslToRGB</span>() 
+  {
+    <span style="color:#a6e22e">h</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;h&#39;</span>).<span style="color:#a6e22e">value</span>;
+    <span style="color:#a6e22e">s</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;s&#39;</span>).<span style="color:#a6e22e">value</span>;
+    <span style="color:#a6e22e">l</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;l&#39;</span>).<span style="color:#a6e22e">value</span>;
+    <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">h</span><span style="color:#f92672">==</span><span style="color:#e6db74">&#34;&#34;</span> ) <span style="color:#a6e22e">h</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">s</span><span style="color:#f92672">==</span><span style="color:#e6db74">&#34;&#34;</span> ) <span style="color:#a6e22e">s</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">l</span><span style="color:#f92672">==</span><span style="color:#e6db74">&#34;&#34;</span> ) <span style="color:#a6e22e">l</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+    <span style="color:#a6e22e">h</span> <span style="color:#f92672">=</span> parseFloat(<span style="color:#a6e22e">h</span>);
+    <span style="color:#a6e22e">s</span> <span style="color:#f92672">=</span> parseFloat(<span style="color:#a6e22e">s</span>);
+    <span style="color:#a6e22e">l</span> <span style="color:#f92672">=</span> parseFloat(<span style="color:#a6e22e">l</span>);
+    <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">h</span><span style="color:#f92672">&lt;</span><span style="color:#ae81ff">0</span> ) <span style="color:#a6e22e">h</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">s</span><span style="color:#f92672">&lt;</span><span style="color:#ae81ff">0</span> ) <span style="color:#a6e22e">s</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">l</span><span style="color:#f92672">&lt;</span><span style="color:#ae81ff">0</span> ) <span style="color:#a6e22e">l</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">h</span><span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">360</span> ) <span style="color:#a6e22e">h</span><span style="color:#f92672">=</span><span style="color:#ae81ff">359</span>;
+    <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">s</span><span style="color:#f92672">&gt;</span><span style="color:#ae81ff">100</span> ) <span style="color:#a6e22e">s</span><span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>;
+    <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">l</span><span style="color:#f92672">&gt;</span><span style="color:#ae81ff">100</span> ) <span style="color:#a6e22e">l</span><span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>;
+    <span style="color:#a6e22e">s</span><span style="color:#960050;background-color:#1e0010">/=100;</span>
+    <span style="color:#a6e22e">l</span><span style="color:#960050;background-color:#1e0010">/=100;</span>
+    <span style="color:#a6e22e">C</span> <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span><span style="color:#f92672">-</span>Math.<span style="color:#a6e22e">abs</span>(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span><span style="color:#a6e22e">l</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>))<span style="color:#f92672">*</span><span style="color:#a6e22e">s</span>;
+    <span style="color:#a6e22e">hh</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">h</span><span style="color:#960050;background-color:#1e0010">/60;</span>
+    <span style="color:#a6e22e">X</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">C</span><span style="color:#f92672">*</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">-</span>Math.<span style="color:#a6e22e">abs</span>(<span style="color:#a6e22e">hh</span><span style="color:#f92672">%</span><span style="color:#ae81ff">2</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));
+    <span style="color:#a6e22e">r</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">g</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">hh</span><span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">hh</span><span style="color:#f92672">&lt;</span><span style="color:#ae81ff">1</span> )
+    {
+      <span style="color:#a6e22e">r</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">C</span>;
+      <span style="color:#a6e22e">g</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">X</span>;
+    }
+    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">hh</span><span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">hh</span><span style="color:#f92672">&lt;</span><span style="color:#ae81ff">2</span> )
+    {
+      <span style="color:#a6e22e">r</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">X</span>;
+      <span style="color:#a6e22e">g</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">C</span>;
+    }
+    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">hh</span><span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">hh</span><span style="color:#f92672">&lt;</span><span style="color:#ae81ff">3</span> )
+    {
+      <span style="color:#a6e22e">g</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">C</span>;
+      <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">X</span>;
+    }
+    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">hh</span><span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">3</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">hh</span><span style="color:#f92672">&lt;</span><span style="color:#ae81ff">4</span> )
+    {
+      <span style="color:#a6e22e">g</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">X</span>;
+      <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">C</span>;
+    }
+    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">hh</span><span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">4</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">hh</span><span style="color:#f92672">&lt;</span><span style="color:#ae81ff">5</span> )
+    {
+      <span style="color:#a6e22e">r</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">X</span>;
+      <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">C</span>;
+    }
+    <span style="color:#66d9ef">else</span>
+    {
+      <span style="color:#a6e22e">r</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">C</span>;
+      <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">X</span>;
+    }
+    <span style="color:#a6e22e">m</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">l</span><span style="color:#f92672">-</span><span style="color:#a6e22e">C</span><span style="color:#960050;background-color:#1e0010">/2;</span>
+    <span style="color:#a6e22e">r</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">m</span>;
+    <span style="color:#a6e22e">g</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">m</span>;
+    <span style="color:#a6e22e">b</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">m</span>;
+    <span style="color:#a6e22e">r</span> <span style="color:#f92672">*=</span> <span style="color:#ae81ff">255.0</span>;
+    <span style="color:#a6e22e">g</span> <span style="color:#f92672">*=</span> <span style="color:#ae81ff">255.0</span>;
+    <span style="color:#a6e22e">b</span> <span style="color:#f92672">*=</span> <span style="color:#ae81ff">255.0</span>;
+    <span style="color:#a6e22e">r</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">r</span>);
+    <span style="color:#a6e22e">g</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">g</span>);
+    <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">b</span>);
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">r</span>);
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">g</span>);
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">b</span>);
+  }
+</code></pre></td></tr></table>
+</div>
+</div>
+
+<h2 id="rgb-to-hsl">RGB to HSL</h2>
+
+<p>Continuing with RGB to HSL, second <a href="https://en.wikipedia.org/wiki/RGB_color_model" target="_blank">Wikipédia</a>, The RGB color model is an additive color model in which red, green and blue light are added together in various ways to reproduce a broad array of colors. The name of the model comes from the initials of the three additive primary colors, red, green and blue. The main purpose of the RGB color model is for the sensing, representation and display of images in electronic systems, such as televisions and computers, though it has also been used in conventional photography. Before the electronic age, the RGB color model already had a solid theory behind it, based in human perception of colors.</p>
+
+<p>The intensity each color is defined with values between 0 and 255. For quick example, if we want the pure red, we can define in RGB: (255, 0, 0).</p>
+
+<p>So, let&rsquo;s start with the math formula implemented in JavaScript:</p>
+
+<p>Variables:</p>
+
+<p>R&rsquo; = R/255</p>
+
+<p>G&rsquo; = G/255</p>
+
+<p>B&rsquo; = B/255</p>
+
+<p>Cmax = max(R&rsquo;, G&rsquo;, B&rsquo;)</p>
+
+<p>Cmin = min(R&rsquo;, G&rsquo;, B&rsquo;)</p>
+
+<p>Δ = Cmax - Cmin</p>
+
+<p>With these variables, we used the following formula to get Hue, Saturation and Lightness respectly:</p>
+
+<h1 id="hue">Hue</h1>
+
+<p><img src="/img/hue-calc2.gif" alt="alt hue-calculation" title="Hue Calculation" /></p>
+
+<h1 id="saturation">Saturation</h1>
+
+<p><img src="/img/sat-calc.gif" alt="alt saturation-calculation" title="Saturation Calculation" /></p>
+
+<h1 id="lightness">Lightness</h1>
+
+<p>L = (Cmax + Cmin) / 2</p>
+
+<p>And now, we can test this formula:</p>
+
+<p><input id="r" placeholder="Value of R:" /><br>
+<input id="g" placeholder="Value of G:" /><br>
+<input id="b" placeholder="Value of B:" /><br>
+<button id="rgb_to_hsl">Calculate</button>
+<div id="result2">Result RGB to HSL</div></p>
+
+<h1 id="algorithm-implemented-in-javascript-1">Algorithm Implemented in Javascript</h1>
+
+<p>Obs: the code already verify input values :)</p>
+
+<p><div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7c7c79">42
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">  <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">rgbToHSL</span>() 
+  {
+    <span style="color:#a6e22e">r</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;r&#39;</span>).<span style="color:#a6e22e">value</span>;
+    <span style="color:#a6e22e">g</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;g&#39;</span>).<span style="color:#a6e22e">value</span>;
+    <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;b&#39;</span>).<span style="color:#a6e22e">value</span>;
+
+    <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">r</span><span style="color:#f92672">==</span><span style="color:#e6db74">&#34;&#34;</span> ) <span style="color:#a6e22e">r</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">g</span><span style="color:#f92672">==</span><span style="color:#e6db74">&#34;&#34;</span> ) <span style="color:#a6e22e">g</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">b</span><span style="color:#f92672">==</span><span style="color:#e6db74">&#34;&#34;</span> ) <span style="color:#a6e22e">b</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+    <span style="color:#a6e22e">r</span> <span style="color:#f92672">=</span> parseFloat(<span style="color:#a6e22e">r</span>);
+    <span style="color:#a6e22e">g</span> <span style="color:#f92672">=</span> parseFloat(<span style="color:#a6e22e">g</span>);
+    <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> parseFloat(<span style="color:#a6e22e">b</span>);
+    <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">r</span><span style="color:#f92672">&lt;</span><span style="color:#ae81ff">0</span> ) <span style="color:#a6e22e">r</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">g</span><span style="color:#f92672">&lt;</span><span style="color:#ae81ff">0</span> ) <span style="color:#a6e22e">g</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">b</span><span style="color:#f92672">&lt;</span><span style="color:#ae81ff">0</span> ) <span style="color:#a6e22e">b</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">r</span><span style="color:#f92672">&gt;</span><span style="color:#ae81ff">255</span> ) <span style="color:#a6e22e">r</span><span style="color:#f92672">=</span><span style="color:#ae81ff">255</span>;
+    <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">g</span><span style="color:#f92672">&gt;</span><span style="color:#ae81ff">255</span> ) <span style="color:#a6e22e">g</span><span style="color:#f92672">=</span><span style="color:#ae81ff">255</span>;
+    <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">b</span><span style="color:#f92672">&gt;</span><span style="color:#ae81ff">255</span> ) <span style="color:#a6e22e">b</span><span style="color:#f92672">=</span><span style="color:#ae81ff">255</span>;
+    <span style="color:#a6e22e">r</span><span style="color:#960050;background-color:#1e0010">/=255;</span>
+    <span style="color:#a6e22e">g</span><span style="color:#960050;background-color:#1e0010">/=255;</span>
+    <span style="color:#a6e22e">b</span><span style="color:#960050;background-color:#1e0010">/=255;</span>
+    <span style="color:#a6e22e">M</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">max</span>(<span style="color:#a6e22e">r</span>,<span style="color:#a6e22e">g</span>,<span style="color:#a6e22e">b</span>);
+    <span style="color:#a6e22e">m</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">min</span>(<span style="color:#a6e22e">r</span>,<span style="color:#a6e22e">g</span>,<span style="color:#a6e22e">b</span>);
+    <span style="color:#a6e22e">d</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">M</span><span style="color:#f92672">-</span><span style="color:#a6e22e">m</span>;
+    <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">d</span><span style="color:#f92672">==</span><span style="color:#ae81ff">0</span> ) <span style="color:#a6e22e">h</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">M</span><span style="color:#f92672">==</span><span style="color:#a6e22e">r</span> ) <span style="color:#a6e22e">h</span><span style="color:#f92672">=</span>((<span style="color:#a6e22e">g</span><span style="color:#f92672">-</span><span style="color:#a6e22e">b</span>)<span style="color:#960050;background-color:#1e0010">/d)%6;</span>
+    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">M</span><span style="color:#f92672">==</span><span style="color:#a6e22e">g</span> ) <span style="color:#a6e22e">h</span><span style="color:#f92672">=</span>(<span style="color:#a6e22e">b</span><span style="color:#f92672">-</span><span style="color:#a6e22e">r</span>)<span style="color:#960050;background-color:#1e0010">/d+2;</span>
+    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">h</span><span style="color:#f92672">=</span>(<span style="color:#a6e22e">r</span><span style="color:#f92672">-</span><span style="color:#a6e22e">g</span>)<span style="color:#960050;background-color:#1e0010">/d+4;</span>
+    <span style="color:#a6e22e">h</span><span style="color:#f92672">*=</span><span style="color:#ae81ff">60</span>;
+    <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">h</span><span style="color:#f92672">&lt;</span><span style="color:#ae81ff">0</span> ) <span style="color:#a6e22e">h</span><span style="color:#f92672">+=</span><span style="color:#ae81ff">360</span>;
+    <span style="color:#a6e22e">l</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">M</span><span style="color:#f92672">+</span><span style="color:#a6e22e">m</span>)<span style="color:#960050;background-color:#1e0010">/2;</span>
+    <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">d</span><span style="color:#f92672">==</span><span style="color:#ae81ff">0</span> )
+      <span style="color:#a6e22e">s</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">else</span>
+      <span style="color:#a6e22e">s</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">d</span><span style="color:#960050;background-color:#1e0010">/(1-Math.abs(2*l-1));</span>
+    <span style="color:#a6e22e">s</span><span style="color:#f92672">*=</span><span style="color:#ae81ff">100</span>;
+    <span style="color:#a6e22e">l</span><span style="color:#f92672">*=</span><span style="color:#ae81ff">100</span>;
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">h</span>.<span style="color:#a6e22e">toFixed</span>(<span style="color:#ae81ff">0</span>));
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">toFixed</span>(<span style="color:#ae81ff">1</span>));
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">l</span>.<span style="color:#a6e22e">toFixed</span>(<span style="color:#ae81ff">1</span>));
+  }
+</code></pre></td></tr></table>
+</div>
+</div></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>The two color systems have come to revolutionize color representation in the electronic age. It&rsquo;s pretty excity to learn about how the colors in the human eye works and how we can represent images in pixels, by mixing colors represented by bits. I really hope to post more things about CG in this blog. If you liked this post, found some error or something I can do better, please comment ! :)</p>
+
+<script type="text/javascript">
+  /* HSL to RGB */
+  function hslToRGB() 
+  {
+    h = document.getElementById('h').value;
+    s = document.getElementById('s').value;
+    l = document.getElementById('l').value;
+    if( h=="" ) h=0;
+    if( s=="" ) s=0;
+    if( l=="" ) l=0;
+    h = parseFloat(h);
+    s = parseFloat(s);
+    l = parseFloat(l);
+    if( h<0 ) h=0;
+    if( s<0 ) s=0;
+    if( l<0 ) l=0;
+    if( h>=360 ) h=359;
+    if( s>100 ) s=100;
+    if( l>100 ) l=100;
+    s/=100;
+    l/=100;
+    C = (1-Math.abs(2*l-1))*s;
+    hh = h/60;
+    X = C*(1-Math.abs(hh%2-1));
+    r = g = b = 0;
+    if( hh>=0 && hh<1 )
+    {
+      r = C;
+      g = X;
+    }
+    else if( hh>=1 && hh<2 )
+    {
+      r = X;
+      g = C;
+    }
+    else if( hh>=2 && hh<3 )
+    {
+      g = C;
+      b = X;
+    }
+    else if( hh>=3 && hh<4 )
+    {
+      g = X;
+      b = C;
+    }
+    else if( hh>=4 && hh<5 )
+    {
+      r = X;
+      b = C;
+    }
+    else
+    {
+      r = C;
+      b = X;
+    }
+    m = l-C/2;
+    r += m;
+    g += m;
+    b += m;
+    r *= 255.0;
+    g *= 255.0;
+    b *= 255.0;
+    r = Math.round(r);
+    g = Math.round(g);
+    b = Math.round(b);
+    hex = r*65536+g*256+b;
+    hex = hex.toString(16,6);
+    len = hex.length;
+    if( len<6 )
+      for(i=0; i<6-len; i++)
+        hex = '0'+hex;
+    console.log(hex.toUpperCase());
+    console.log(r);
+    console.log(g);
+    console.log(b);
+    console.log('#'+hex);
+    document.getElementById('result1').innerHTML = 'R:'+r+' G:'+g+' B:'+b;
+    document.getElementById('result1').style.backgroundColor='#'+hex;
+  }
+
+  document.getElementById('hsl_to_rgb').addEventListener('click', function(e) {
+    hslToRGB();
+  });
+  
+  /* RGB to HSL */
+  function rgbToHSL() 
+  {
+    r = document.getElementById('r').value;
+    g = document.getElementById('g').value;
+    b = document.getElementById('b').value;
+
+    if( r=="" ) r=0;
+    if( g=="" ) g=0;
+    if( b=="" ) b=0;
+    r = parseFloat(r);
+    g = parseFloat(g);
+    b = parseFloat(b);
+    if( r<0 ) r=0;
+    if( g<0 ) g=0;
+    if( b<0 ) b=0;
+    if( r>255 ) r=255;
+    if( g>255 ) g=255;
+    if( b>255 ) b=255;
+    hex = r*65536+g*256+b;
+    hex = hex.toString(16,6);
+    len = hex.length;
+    if( len<6 )
+      for(i=0; i<6-len; i++)
+        hex = '0'+hex;
+    r/=255;
+    g/=255;
+    b/=255;
+    M = Math.max(r,g,b);
+    m = Math.min(r,g,b);
+    d = M-m;
+    if( d==0 ) h=0;
+    else if( M==r ) h=((g-b)/d)%6;
+    else if( M==g ) h=(b-r)/d+2;
+    else h=(r-g)/d+4;
+    h*=60;
+    if( h<0 ) h+=360;
+    l = (M+m)/2;
+    if( d==0 )
+      s = 0;
+    else
+      s = d/(1-Math.abs(2*l-1));
+    s*=100;
+    l*=100;
+    console.log(h.toFixed(0));
+    console.log(s.toFixed(1));
+    console.log(l.toFixed(1));
+    console.log('#'+hex);
+    document.getElementById('result2').innerHTML = 'H:'+h.toFixed(0)+' S:'+s.toFixed(1)+' L:'+l.toFixed(1);
+    document.getElementById('result2').style.backgroundColor='#'+hex;
+  }
+  
+  document.getElementById('rgb_to_hsl').addEventListener('click', function(e) {
+    rgbToHSL();
+  });
+
+</script>
+
+      </article>
+  </div>
+</section>
+<aside id="meta">
+    <div>
+    <h4>Categories</h4>
+    
+    <ul id="categories">
+      
+        <li><a href="https://takaki10.github.io/categoriesarticles">Articles</a> </li>
+      
+    </ul>
+    
+    
+    </div>
+    <div class="nav-bottom">
+        
+          <a class="previous" href="https://takaki10.github.io/posts/2016-04-04-deploy-project-django/">Previous: Deploy Django Project in CentOS 7.2</a>
+        
+        
+    </div>
+</aside>
+
+          </div><footer>
+  <p>Copyright &copy; 2018 - takaki.me</p>
+</footer></div>
+      </div>
+    </body>
+</html>

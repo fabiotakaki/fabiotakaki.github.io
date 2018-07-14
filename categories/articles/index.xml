@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Articles on Fabio S. Takaki - TakakiME</title>
+    <link>https://takaki10.github.io/categories/articles/</link>
+    <description>Recent content in Articles on Fabio S. Takaki - TakakiME</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 09 Nov 2016 07:25:54 -0200</lastBuildDate>
+    
+	<atom:link href="https://takaki10.github.io/categories/articles/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>RGB and HSL</title>
+      <link>https://takaki10.github.io/posts/2016-11-08-rgb-and-hsl/</link>
+      <pubDate>Wed, 09 Nov 2016 07:25:54 -0200</pubDate>
+      
+      <guid>https://takaki10.github.io/posts/2016-11-08-rgb-and-hsl/</guid>
+      <description>#result2, #result1{ width:200px; padding:10px; }
+input{ padding:10px; border-radius: 5px; border:1px solid #ccc; width:100%; margin:10px 0; }
+button{ padding:10px; border:1px solid #ccc; background: #fff; }
+button:hover{ background: #333; color:#fff; }  Recently my teacher Almir Olivette Artero, gave us a work to convert RGB to HSL or vice-versa to start to learn a little about CG.
+Then, I decided to share here how I did the calculation and implementation.</description>
+    </item>
+    
+    <item>
+      <title>Deploy Django Project in CentOS 7.2</title>
+      <link>https://takaki10.github.io/posts/2016-04-04-deploy-project-django/</link>
+      <pubDate>Mon, 04 Apr 2016 15:47:00 -0200</pubDate>
+      
+      <guid>https://takaki10.github.io/posts/2016-04-04-deploy-project-django/</guid>
+      <description>Today We will deploy my first project created with Django Framework 1.9 in CentOS 7.2. To do that, first I created a droplet with CentOS 7.2 installed. If you don&amp;rsquo;t know how to create a droplet in Digital Ocean, see this tutorial. Lastly, to deploy the project, we will use Apache with mod_wsgi.
+Now, let&amp;rsquo;s start:
+ First update repositories: yum update -y
+ To get pip, we&amp;rsquo;ll need to enable the EPEL repository, which as some additional packages.</description>
+    </item>
+    
+    <item>
+      <title>Software Engineer</title>
+      <link>https://takaki10.github.io/posts/2016-03-11-software-engineer/</link>
+      <pubDate>Fri, 11 Mar 2016 08:49:30 -0200</pubDate>
+      
+      <guid>https://takaki10.github.io/posts/2016-03-11-software-engineer/</guid>
+      <description>Hello, I&amp;rsquo;m here to share a very good article about Software Engineer, differentiating the Good Engineers of the Bad Engineers. The article was indication from my teacher of Software Engineer, Dr. Rogério Eduardo Garcia, which tells relatively important points that should have good engineers that bad engineers have not.
+According to Wikipédia, Engineer is: &amp;ldquo;An engineer is a practitioner of engineering, concerned with applying scientific knowledge, mathematics, and ingenuity to develop solutions for technical, societal and commercial problems.</description>
+    </item>
+    
+  </channel>
+</rss>
