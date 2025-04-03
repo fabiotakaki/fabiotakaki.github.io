@@ -4,46 +4,30 @@
     <title>Posts on Fabio S. Takaki - TakakiME</title>
     <link>/posts/</link>
     <description>Recent content in Posts on Fabio S. Takaki - TakakiME</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 09 Nov 2016 07:25:54 -0200</lastBuildDate>
-    
-	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>RGB and HSL</title>
       <link>/posts/2016-11-08-rgb-and-hsl/</link>
       <pubDate>Wed, 09 Nov 2016 07:25:54 -0200</pubDate>
-      
       <guid>/posts/2016-11-08-rgb-and-hsl/</guid>
-      <description>Recently my teacher Almir Olivette Artero, gave us a work to convert RGB to HSL or vice-versa to start to learn a little about CG.
-Then, I decided to share here how I did the calculation and implementation.
-Notice that it is possible to visualize with the result the preview of the color.
-Lastly, I will post in another post, how to manipulate images showing all code used.
-HSL to RGB Second Wikipedia, HSL are the two most common cylindrical-coordinate representations of points in an RGB color model.</description>
+      <description>&lt;!-- raw HTML omitted --&gt;&#xA;&lt;!-- raw HTML omitted --&gt;&#xA;&lt;p&gt;Recently my teacher &lt;!-- raw HTML omitted --&gt;Almir Olivette Artero&lt;!-- raw HTML omitted --&gt;, gave us a work to convert RGB to HSL or vice-versa to start to learn a little about CG.&lt;/p&gt;&#xA;&lt;p&gt;Then, I decided to share here how I did the calculation and implementation.&lt;/p&gt;&#xA;&lt;p&gt;Notice that it is possible to visualize with the result the preview of the color.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Deploy Django Project in CentOS 7.2</title>
       <link>/posts/2016-04-04-deploy-project-django/</link>
       <pubDate>Mon, 04 Apr 2016 15:47:00 -0200</pubDate>
-      
       <guid>/posts/2016-04-04-deploy-project-django/</guid>
-      <description>Today We will deploy my first project created with Django Framework 1.9 in CentOS 7.2. To do that, first I created a droplet with CentOS 7.2 installed. If you don&amp;rsquo;t know how to create a droplet in Digital Ocean, see this tutorial. Lastly, to deploy the project, we will use Apache with mod_wsgi.
-Now, let&amp;rsquo;s start:
- First update repositories:  1  yum update -y     To get pip, we&amp;rsquo;ll need to enable the EPEL repository, which as some additional packages.</description>
+      <description>&lt;p&gt;Today We will deploy my first project created with Django Framework 1.9 in CentOS 7.2. To do that, first I created a droplet with CentOS 7.2 installed. If you don&amp;rsquo;t know how to create a droplet in Digital Ocean, see this &lt;!-- raw HTML omitted --&gt;tutorial&lt;!-- raw HTML omitted --&gt;. Lastly, to deploy the project, we will use Apache with mod_wsgi.&lt;/p&gt;&#xA;&lt;p&gt;Now, let&amp;rsquo;s start:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;First update repositories:&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&#xA;&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1&#xA;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&#xA;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bashrc&#34; data-lang=&#34;bashrc&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yum update -y&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;To get &lt;code&gt;pip&lt;/code&gt;, we&amp;rsquo;ll need to enable the EPEL repository, which as some additional packages. You can do that easily by typing:&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&#xA;&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1&#xA;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&#xA;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo yum install epel-release&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Software Engineer</title>
       <link>/posts/2016-03-11-software-engineer/</link>
       <pubDate>Fri, 11 Mar 2016 08:49:30 -0200</pubDate>
-      
       <guid>/posts/2016-03-11-software-engineer/</guid>
-      <description>Hello, I&amp;rsquo;m here to share a very good article about Software Engineer, differentiating the Good Engineers of the Bad Engineers. The article was indication from my teacher of Software Engineer, Dr. Rogério Eduardo Garcia, which tells relatively important points that should have good engineers that bad engineers have not.
-According to Wikipédia, Engineer is: &amp;ldquo;An engineer is a practitioner of engineering, concerned with applying scientific knowledge, mathematics, and ingenuity to develop solutions for technical, societal and commercial problems.</description>
+      <description>&lt;p&gt;Hello,&#xA;I&amp;rsquo;m here to share a very good article about Software Engineer, differentiating the Good Engineers of the Bad Engineers.&#xA;The article was indication from my teacher of Software Engineer, &lt;!-- raw HTML omitted --&gt;Dr. Rogério Eduardo Garcia&lt;!-- raw HTML omitted --&gt;, which tells relatively important points that should have good engineers that bad engineers have not.&lt;/p&gt;&#xA;&lt;p&gt;According to Wikipédia, Engineer is:&#xA;&amp;ldquo;An engineer is a practitioner of engineering, concerned with applying scientific knowledge, mathematics, and ingenuity to develop solutions for technical, societal and commercial problems. Engineers design materials, structures, and systems while considering the limitations imposed by practicality, regulation, safety, and cost.&amp;rdquo;.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>
